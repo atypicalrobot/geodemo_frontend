@@ -9,6 +9,7 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 
 import { makeSelectStories, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
@@ -40,6 +41,27 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       error,
       stories,
     };
+
+    const position = [51.505, -0.09];
+
+    const mapStyle = {
+      height: '480px'
+    }
+
+    const map = (
+      <Map center={position} zoom={13} style={mapStyle}>
+        <TileLayer
+          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={position}>
+          <Popup>
+            <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
+          </Popup>
+        </Marker>
+      </Map>
+    );
+
 
     return (
       <article>
@@ -78,6 +100,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               </label>
             </Form>
             <StoriesList {...storiesListProps} />
+            {map}
           </Section>
         </div>
       </article>

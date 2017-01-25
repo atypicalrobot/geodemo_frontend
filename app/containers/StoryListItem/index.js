@@ -21,28 +21,18 @@ export class StoryListItem extends React.PureComponent { // eslint-disable-line 
     const item = this.props.item;
     let nameprefix = '';
 
-    // If the story is owned by a different person than we got the data for
-    // it's a fork and we should show the name of the owner
-    if (item.owner.login !== this.props.currentGenre) {
-      nameprefix = `${item.owner.login}/`;
-    }
-
     // Put together the content of the story
     const content = (
       <Wrapper>
         <StoryLink href={item.html_url} target="_blank">
-          {nameprefix + item.name}
+          {item.title}
         </StoryLink>
-        <IssueLink href={`${item.html_url}/issues`} target="_blank">
-          <IssueIcon />
-          <FormattedNumber value={item.open_issues_count} />
-        </IssueLink>
       </Wrapper>
     );
 
     // Render the content into a list item
     return (
-      <ListItem key={`story-list-item-${item.full_name}`} item={content} />
+      <ListItem key={`story-list-item-${item.slug}`} item={content} />
     );
   }
 }

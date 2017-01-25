@@ -16,7 +16,7 @@ import { makeSelectGenre } from 'containers/HomePage/selectors';
 export function* getStories() {
   // Select genre from store
   const genre = yield select(makeSelectGenre());
-  const requestURL = `https://api.github.com/users/${genre}/stories?type=all&sort=updated`;
+  const requestURL = `/api/stories/?genre=${genre}`;
 
   try {
     // Call our request helper (see 'utils/request')
