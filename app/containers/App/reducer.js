@@ -13,34 +13,34 @@
 import { fromJS } from 'immutable';
 
 import {
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS,
-  LOAD_REPOS_ERROR,
+  LOAD_STORIES_SUCCESS,
+  LOAD_STORIES,
+  LOAD_STORIES_ERROR,
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   loading: false,
   error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
+  currentGenre: false,
+  storyData: {
+    stories: false,
   },
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_REPOS:
+    case LOAD_STORIES:
       return state
         .set('loading', true)
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
-    case LOAD_REPOS_SUCCESS:
+        .setIn(['storyData', 'stories'], false);
+    case LOAD_STORIES_SUCCESS:
       return state
-        .setIn(['userData', 'repositories'], action.repos)
+        .setIn(['storyData', 'stories'], action.stories)
         .set('loading', false)
-        .set('currentUser', action.username);
-    case LOAD_REPOS_ERROR:
+        .set('currentGenre', action.genre);
+    case LOAD_STORIES_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);

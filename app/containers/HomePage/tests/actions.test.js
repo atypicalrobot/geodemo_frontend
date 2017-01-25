@@ -1,21 +1,21 @@
 import {
-  CHANGE_USERNAME,
+  CHANGE_GENRE,
 } from '../constants';
 
 import {
-  changeUsername,
+  changeGenre,
 } from '../actions';
 
 describe('Home Actions', () => {
-  describe('changeUsername', () => {
+  describe('changeGenre', () => {
     it('should return the correct type and the passed name', () => {
       const fixture = 'Max';
       const expectedResult = {
-        type: CHANGE_USERNAME,
+        type: CHANGE_GENRE,
         name: fixture,
       };
 
-      expect(changeUsername(fixture)).toEqual(expectedResult);
+      expect(changeGenre(fixture)).toEqual(expectedResult);
     });
   });
 });

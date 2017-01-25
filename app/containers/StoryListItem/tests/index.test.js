@@ -1,5 +1,5 @@
 /**
- * Test the repo list item
+ * Test the story list item
  */
 
 import React from 'react';
@@ -7,15 +7,15 @@ import { shallow, render } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 
 import ListItem from 'components/ListItem';
-import { RepoListItem } from '../index';
+import { StoryListItem } from '../index';
 
 const renderComponent = (props = {}) => render(
   <IntlProvider locale="en">
-    <RepoListItem {...props} />
+    <StoryListItem {...props} />
   </IntlProvider>
 );
 
-describe('<RepoListItem />', () => {
+describe('<StoryListItem />', () => {
   let item;
 
   // Before each test reset the item data for safety
@@ -33,28 +33,28 @@ describe('<RepoListItem />', () => {
 
   it('should render a ListItem', () => {
     const renderedComponent = shallow(
-      <RepoListItem item={item} />
+      <StoryListItem item={item} />
     );
     expect(renderedComponent.find(ListItem).length).toBe(1);
   });
 
-  it('should not render the current username', () => {
+  it('should not render the current genre', () => {
     const renderedComponent = renderComponent({
       item,
-      currentUser: item.owner.login,
+      currentGenre: item.owner.login,
     });
     expect(renderedComponent.text()).not.toContain(item.owner.login);
   });
 
-  it('should render usernames that are not the current one', () => {
+  it('should render genres that are not the current one', () => {
     const renderedComponent = renderComponent({
       item,
-      currentUser: 'nikgraf',
+      currentGenre: 'nikgraf',
     });
     expect(renderedComponent.text()).toContain(item.owner.login);
   });
 
-  it('should render the repo name', () => {
+  it('should render the story name', () => {
     const renderedComponent = renderComponent({ item });
     expect(renderedComponent.text()).toContain(item.name);
   });

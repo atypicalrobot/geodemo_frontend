@@ -8,7 +8,7 @@ const selectGlobal = (state) => state.get('global');
 
 const makeSelectCurrentUser = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.get('currentUser')
+  (globalState) => globalState.get('currentGenre')
 );
 
 const makeSelectLoading = () => createSelector(
@@ -21,9 +21,9 @@ const makeSelectError = () => createSelector(
   (globalState) => globalState.get('error')
 );
 
-const makeSelectRepos = () => createSelector(
+const makeSelectStories = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'repositories'])
+  (globalState) => globalState.getIn(['storyData', 'stories'])
 );
 
 const makeSelectLocationState = () => {
@@ -47,6 +47,6 @@ export {
   makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
-  makeSelectRepos,
+  makeSelectStories,
   makeSelectLocationState,
 };

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import A from 'components/A';
 
-const RepoLink = styled(A)`
+const StoryLink = styled(A)`
   height: 100%;
   color: black;
   display: flex;
@@ -10,4 +10,4 @@ const RepoLink = styled(A)`
   width: 100%;
 `;
 
-export default RepoLink;
+export default StoryLink;

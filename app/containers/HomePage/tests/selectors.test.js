@@ -2,13 +2,13 @@ import { fromJS } from 'immutable';
 
 import {
   selectHome,
-  makeSelectUsername,
+  makeSelectGenre,
 } from '../selectors';
 
 describe('selectHome', () => {
   it('should select the home state', () => {
     const homeState = fromJS({
-      userData: {},
+      storyData: {},
     });
     const mockedState = fromJS({
       home: homeState,
@@ -17,15 +17,15 @@ describe('selectHome', () => {
   });
 });
 
-describe('makeSelectUsername', () => {
-  const usernameSelector = makeSelectUsername();
-  it('should select the username', () => {
-    const username = 'mxstbr';
+describe('makeSelectGenre', () => {
+  const genreSelector = makeSelectGenre();
+  it('should select the genre', () => {
+    const genre = 'mxstbr';
     const mockedState = fromJS({
       home: {
-        username,
+        genre,
       },
     });
-    expect(usernameSelector(mockedState)).toEqual(username);
+    expect(genreSelector(mockedState)).toEqual(genre);
   });
 });

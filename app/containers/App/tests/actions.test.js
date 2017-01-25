@@ -1,51 +1,51 @@
 import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
+  LOAD_STORIES,
+  LOAD_STORIES_SUCCESS,
+  LOAD_STORIES_ERROR,
 } from '../constants';
 
 import {
-  loadRepos,
-  reposLoaded,
-  repoLoadingError,
+  loadStories,
+  storiesLoaded,
+  storyLoadingError,
 } from '../actions';
 
 describe('App Actions', () => {
-  describe('loadRepos', () => {
+  describe('loadStories', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: LOAD_REPOS,
+        type: LOAD_STORIES,
       };
 
-      expect(loadRepos()).toEqual(expectedResult);
+      expect(loadStories()).toEqual(expectedResult);
     });
   });
 
-  describe('reposLoaded', () => {
-    it('should return the correct type and the passed repos', () => {
+  describe('storiesLoaded', () => {
+    it('should return the correct type and the passed stories', () => {
       const fixture = ['Test'];
-      const username = 'test';
+      const genre = 'test';
       const expectedResult = {
-        type: LOAD_REPOS_SUCCESS,
-        repos: fixture,
-        username,
+        type: LOAD_STORIES_SUCCESS,
+        stories: fixture,
+        genre,
       };
 
-      expect(reposLoaded(fixture, username)).toEqual(expectedResult);
+      expect(storiesLoaded(fixture, genre)).toEqual(expectedResult);
     });
   });
 
-  describe('repoLoadingError', () => {
+  describe('storyLoadingError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: LOAD_REPOS_ERROR,
+        type: LOAD_STORIES_ERROR,
         error: fixture,
       };
 
-      expect(repoLoadingError(fixture)).toEqual(expectedResult);
+      expect(storyLoadingError(fixture)).toEqual(expectedResult);
     });
   });
 });

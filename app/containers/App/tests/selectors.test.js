@@ -5,7 +5,7 @@ import {
   makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
-  makeSelectRepos,
+  makeSelectStories,
   makeSelectLocationState,
 } from '../selectors';
 
@@ -20,15 +20,15 @@ describe('selectGlobal', () => {
 });
 
 describe('makeSelectCurrentUser', () => {
-  const currentUserSelector = makeSelectCurrentUser();
+  const currentGenreSelector = makeSelectCurrentUser();
   it('should select the current user', () => {
-    const username = 'mxstbr';
+    const genre = 'mxstbr';
     const mockedState = fromJS({
       global: {
-        currentUser: username,
+        currentGenre: genre,
       },
     });
-    expect(currentUserSelector(mockedState)).toEqual(username);
+    expect(currentGenreSelector(mockedState)).toEqual(genre);
   });
 });
 
@@ -58,18 +58,18 @@ describe('makeSelectError', () => {
   });
 });
 
-describe('makeSelectRepos', () => {
-  const reposSelector = makeSelectRepos();
-  it('should select the repos', () => {
-    const repositories = fromJS([]);
+describe('makeSelectStories', () => {
+  const storiesSelector = makeSelectStories();
+  it('should select the stories', () => {
+    const stories = fromJS([]);
     const mockedState = fromJS({
       global: {
-        userData: {
-          repositories,
+        storyData: {
+          stories,
         },
       },
     });
-    expect(reposSelector(mockedState)).toEqual(repositories);
+    expect(storiesSelector(mockedState)).toEqual(stories);
   });
 });
 
