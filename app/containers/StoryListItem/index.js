@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedNumber } from 'react-intl';
 
-import { makeSelectCurrentUser } from 'containers/App/selectors';
+import { makeSelectCurrentGenre } from 'containers/App/selectors';
+import { changeStory } from 'containers/HomePage/actions';
 import ListItem from 'components/ListItem';
 import IssueIcon from './IssueIcon';
 import IssueLink from './IssueLink';
@@ -30,7 +31,7 @@ export class StoryListItem extends React.PureComponent { // eslint-disable-line 
     // Put together the content of the story
     const content = (
       <Wrapper>
-        <StoryLink href={item.html_url} target="_blank" onClick={() => this.onStoryClick(item)}>
+        <StoryLink href={item.html_url} target="_blank" onClick={() => this.props.onStoryClick(item)}>
           {item.title}
         </StoryLink>
       </Wrapper>
@@ -48,6 +49,15 @@ StoryListItem.propTypes = {
   currentGenre: React.PropTypes.string,
 };
 
-export default connect(createStructuredSelector({
-  currentGenre: makeSelectCurrentUser(),
-}))(StoryListItem);
+const mapStateToProps = createStructuredSelector({
+  currentGenre: makeSelectCurrentGenre(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onStoryClick: (item) => dispatch(changeStory(item)),
+  };
+}
+
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps, mapDispatchToProps)(StoryListItem);

@@ -10,6 +10,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Slider } from 'react-slick';
+
 
 import { makeSelectStories, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
@@ -22,7 +24,7 @@ import Section from './Section';
 import messages from './messages';
 import { loadStories } from '../App/actions';
 import { changeGenre } from './actions';
-import { makeSelectGenre } from './selectors';
+import { makeSelectGenre, makeSelectStory } from './selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -35,12 +37,34 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
-    const { loading, error, stories } = this.props;
+    const { loading, error, stories, pois, story } = this.props;
     const storiesListProps = {
       loading,
       error,
       stories,
     };
+
+    let poiContent;
+
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+
+    if(story !== false) {
+
+      if (story.pois !== false) {
+        poiContent = story.pois.map((poi) => {
+          return <h3 key={poi.slug}> {poi.title} </h3>
+        });
+        // poiContent = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
+       
+      }
+
+    }
 
     const position = [51.505, -0.09];
 
@@ -100,6 +124,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               </label>
             </Form>
             <StoriesList {...storiesListProps} />
+            {poiContent}
             {map}
           </Section>
         </div>
@@ -135,6 +160,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   stories: makeSelectStories(),
+  story: makeSelectStory(),
   genre: makeSelectGenre(),
   loading: makeSelectLoading(),
   error: makeSelectError(),

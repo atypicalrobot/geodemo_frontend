@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 
 import {
   selectGlobal,
-  makeSelectCurrentUser,
+  makeSelectCurrentGenre,
   makeSelectLoading,
   makeSelectError,
   makeSelectStories,
@@ -19,8 +19,8 @@ describe('selectGlobal', () => {
   });
 });
 
-describe('makeSelectCurrentUser', () => {
-  const currentGenreSelector = makeSelectCurrentUser();
+describe('makeSelectCurrentGenre', () => {
+  const currentGenreSelector = makeSelectCurrentGenre();
   it('should select the current user', () => {
     const genre = 'mxstbr';
     const mockedState = fromJS({

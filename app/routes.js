@@ -39,10 +39,10 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/features',
-      name: 'features',
+      path: '/about',
+      name: 'abouts',
       getComponent(nextState, cb) {
-        import('containers/FeaturePage')
+        import('containers/AboutPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

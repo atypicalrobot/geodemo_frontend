@@ -13,20 +13,26 @@ import { fromJS } from 'immutable';
 
 import {
   CHANGE_GENRE,
+  CHANGE_STORY,
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   genre: '',
+  story: false,
+  pois: false,
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_GENRE:
-
       // Delete prefixed '@' from the github genre
       return state
-        .set('genre', action.name.replace(/@/gi, ''));
+        .set('genre', action.genre);
+    case CHANGE_STORY:
+      return state
+        .set('story', action.story)
+        // .set('pois', action.story.pois);
     default:
       return state;
   }

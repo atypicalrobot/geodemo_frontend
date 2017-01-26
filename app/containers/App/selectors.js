@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 const selectGlobal = (state) => state.get('global');
 
-const makeSelectCurrentUser = () => createSelector(
+const makeSelectCurrentGenre = () => createSelector(
   selectGlobal,
   (globalState) => globalState.get('currentGenre')
 );
@@ -44,7 +44,7 @@ const makeSelectLocationState = () => {
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
+  makeSelectCurrentGenre,
   makeSelectLoading,
   makeSelectError,
   makeSelectStories,

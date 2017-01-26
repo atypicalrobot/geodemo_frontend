@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 
 import H1 from 'components/H1';
 import messages from '../messages';
-import FeaturePage from '../index';
+import AboutPage from '../index';
 
-describe('<FeaturePage />', () => {
+describe('<AboutPage />', () => {
   it('should render its heading', () => {
     const renderedComponent = shallow(
-      <FeaturePage />
+      <AboutPage />
     );
     expect(renderedComponent.contains(
       <H1>

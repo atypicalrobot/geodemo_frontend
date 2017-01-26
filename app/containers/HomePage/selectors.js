@@ -11,7 +11,19 @@ const makeSelectGenre = () => createSelector(
   (homeState) => homeState.get('genre')
 );
 
+const makeSelectStory = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('story')
+);
+
+const makeSelectPois = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('pois')
+);
+
 export {
   selectHome,
   makeSelectGenre,
+  makeSelectStory,
+  makeSelectPois,
 };

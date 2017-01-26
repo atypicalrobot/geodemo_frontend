@@ -1,7 +1,7 @@
 /*
- * FeaturePage
+ * AboutPage
  *
- * List all the features
+ * List all the abouts
  */
 import React from 'react';
 import Helmet from 'react-helmet';
@@ -13,7 +13,7 @@ import List from './List';
 import ListItem from './ListItem';
 import ListItemTitle from './ListItemTitle';
 
-export default class FeaturePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export default class AboutPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   // Since state and props are static,
   // there's no need to re-render this component
@@ -25,9 +25,9 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
     return (
       <div>
         <Helmet
-          title="Feature Page"
+          title="About Page"
           meta={[
-            { name: 'description', content: 'Feature page of React.js Boilerplate application' },
+            { name: 'description', content: 'About page of React.js Boilerplate application' },
           ]}
         />
         <H1>

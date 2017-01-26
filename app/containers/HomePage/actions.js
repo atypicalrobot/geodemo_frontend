@@ -17,6 +17,7 @@
 
 import {
   CHANGE_GENRE,
+  CHANGE_STORY,
 } from './constants';
 
 /**
@@ -26,9 +27,16 @@ import {
  *
  * @return {object}    An action object with a type of CHANGE_GENRE
  */
-export function changeGenre(name) {
+export function changeGenre(genre) {
   return {
     type: CHANGE_GENRE,
-    name,
+    genre,
+  };
+}
+
+export function changeStory(story) {
+  return {
+    type: CHANGE_STORY,
+    story,
   };
 }
