@@ -24,7 +24,7 @@ function PoiMarker(props) {
   if (props.poi.plugin.slug == 'video') {
 	  poiInnerContent = (<ReactPlayer url={props.poi.metadata.video_url} width='600' height='350' playing />);
   } if (props.poi.plugin.slug == 'imagezoom') {
-	  poiInnerContent = (<ImageZoom image={{ src: props.poi.metadata.image, className: 'img', style: { width: '25em' } }} zoomImage={{ src: props.poi.metadata.zoomImage, }} />);
+	  poiInnerContent = (<ImageZoom image={{ src: props.poi.metadata.image, className: 'img', style: { width: '25em' } }} zoomImage={{ src: props.poi.metadata.zoom_image, }} />);
   } if (props.poi.plugin == 'timeline') {
     //const timelineItems = JSON.parse(props.poi.metadata.timelineItems)
     //poiInnerContent = (<Timeline options={timelineOptions} items={timelineItems} />);

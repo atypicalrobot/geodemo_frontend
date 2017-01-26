@@ -10,18 +10,12 @@ function Footer() {
   return (
     <Wrapper>
       <section>
-        <FormattedMessage {...messages.licenseMessage} />
+        <FormattedMessage {...messages.authorMessage} />
+      </section>
+      <section>
       </section>
       <section>
         <LocaleToggle />
-      </section>
-      <section>
-        <FormattedMessage
-          {...messages.authorMessage}
-          values={{
-            author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
-          }}
-        />
       </section>
     </Wrapper>
   );
