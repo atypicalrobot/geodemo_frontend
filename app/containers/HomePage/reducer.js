@@ -39,6 +39,7 @@ function homeReducer(state = initialState, action) {
     case CHANGE_POI:
       return state
         .set('selectedPoi', action.poi)
+        .set('position', fromJS([action.poi.mpoint.coordinates[1], action.poi.mpoint.coordinates[0]]))
     default:
       return state;
   }

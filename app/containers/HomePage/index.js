@@ -54,6 +54,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     let map;
 
     const posit = [51.628611, -0.748229];
+    console.log(position)
 
     if(story !== false) {
 
@@ -68,7 +69,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         });
         // poiMarkers = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
         map = (
-          <Map center={posit} zoom={13} style={mapStyle}>
+          <Map center={position.toJS()} zoom={13} style={mapStyle}>
             <TileLayer
               url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
