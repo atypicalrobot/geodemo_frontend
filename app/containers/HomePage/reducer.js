@@ -14,6 +14,7 @@ import { fromJS } from 'immutable';
 import {
   CHANGE_GENRE,
   CHANGE_STORY,
+  CHANGE_POI,
 } from './constants';
 
 // The initial state of the App
@@ -21,6 +22,8 @@ const initialState = fromJS({
   genre: '',
   story: false,
   pois: false,
+  position: [51.628611, -0.748229],
+  selectedPoi: false,
 });
 
 function homeReducer(state = initialState, action) {
@@ -33,6 +36,9 @@ function homeReducer(state = initialState, action) {
       return state
         .set('story', action.story)
         // .set('pois', action.story.pois);
+    case CHANGE_POI:
+      return state
+        .set('selectedPoi', action.poi)
     default:
       return state;
   }

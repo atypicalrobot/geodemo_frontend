@@ -15,6 +15,7 @@ import { makeSelectStories, makeSelectLoading, makeSelectError } from 'container
 import H2 from 'components/H2';
 import StoriesList from 'components/StoriesList';
 import PoisList from 'components/PoisList';
+import PoiMarker from 'components/PoiMarker';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
@@ -23,7 +24,7 @@ import Section from './Section';
 import messages from './messages';
 import { loadStories } from '../App/actions';
 import { changeGenre } from './actions';
-import { makeSelectGenre, makeSelectStory } from './selectors';
+import { makeSelectGenre, makeSelectStory, makeSelectPosition, makeSelectedPoi } from './selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -36,7 +37,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   }
 
   render() {
-    const { loading, error, stories, pois, story } = this.props;
+    const { loading, error, stories, pois, story, position, selectedPoi } = this.props;
     const storiesListProps = {
       loading,
       error,
@@ -44,36 +45,40 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     };
 
     let poiContent;
+    let poiMarkers;
+
+    const mapStyle = {
+      height: '400px'
+    }
+
+    let map;
+
+    const posit = [51.628611, -0.748229];
 
     if(story !== false) {
 
       if (story.pois !== false) {
         poiContent = (<PoisList pois={story.pois} loading={loading} error={error} />);
-        // poiContent = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
-       
+        poiMarkers = story.pois.map((poi) => {
+          let selected = false;
+          if(poi.slug == selectedPoi.slug){
+            selected = true;
+          }
+          return <PoiMarker key={poi.slug} poi={poi} selected={selected} />
+        });
+        // poiMarkers = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
+        map = (
+          <Map center={posit} zoom={13} style={mapStyle}>
+            <TileLayer
+              url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {poiMarkers}
+          </Map>
+        );
       }
 
     }
-
-    const position = [51.505, -0.09];
-
-    const mapStyle = {
-      height: '480px'
-    }
-
-    const map = (
-      <Map center={position} zoom={13} style={mapStyle}>
-        <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <Marker position={position}>
-          <Popup>
-            <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-          </Popup>
-        </Marker>
-      </Map>
-    );
 
 
     return (
@@ -113,8 +118,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               </label>
             </Form>
             <StoriesList {...storiesListProps} />
-            {poiContent}
             {map}
+            {poiContent}
           </Section>
         </div>
       </article>
@@ -148,6 +153,8 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  selectedPoi: makeSelectedPoi(),
+  position: makeSelectPosition(),
   stories: makeSelectStories(),
   story: makeSelectStory(),
   genre: makeSelectGenre(),
