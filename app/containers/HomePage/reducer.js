@@ -31,7 +31,8 @@ function homeReducer(state = initialState, action) {
     case CHANGE_GENRE:
       // Delete prefixed '@' from the github genre
       return state
-        .set('genre', action.genre);
+        .set('genre', action.genre)
+        .set('story', false);
     case CHANGE_STORY:
       return state
         .set('story', action.story)

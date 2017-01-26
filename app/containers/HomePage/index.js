@@ -62,29 +62,43 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       let selectedPoiSlug = false;
 
       if (story.pois !== false) {
-        let selected = false;
+        if (story.pois.length > 0) {
+          let selected = false;
+          poiMarkers = story.pois.map((poi) => {
+            
+            if(poi.slug == selectedPoi.slug){
+              selectedPoiSlug = selectedPoi.slug
+              selected = true;
+            }
+            return <PoiMarker key={poi.slug} poi={poi} selected={selected} />
+          });
 
-        poiMarkers = story.pois.map((poi) => {
-          
-          if(poi.slug == selectedPoi.slug){
-            selectedPoiSlug = selectedPoi.slug
-            selected = true;
-          }
-          return <PoiMarker key={poi.slug} poi={poi} selected={selected} />
-        });
+          poiContent = (<PoisList pois={story.pois} loading={loading} error={error} selectedPoiSlug={selectedPoiSlug} />);
 
-        poiContent = (<PoisList pois={story.pois} loading={loading} error={error} selectedPoiSlug={selectedPoiSlug} />);
-
-        // poiMarkers = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
-        map = (
-          <Map center={position.toJS()} zoom={13} style={mapStyle}>
-            <TileLayer
-              url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {poiMarkers}
-          </Map>
-        );
+          // poiMarkers = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
+          map = (
+            <div>
+              <H2>
+                <FormattedMessage {...messages.poisHeader} />
+              </H2>
+              <Map center={position.toJS()} zoom={13} style={mapStyle}>
+                <TileLayer
+                  url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {poiMarkers}
+              </Map>
+            </div>
+          );
+        } else {
+          map = (
+            <div>
+              <H2>
+                <FormattedMessage {...messages.noPois} />
+              </H2>
+            </div>
+          );
+        }
       }
 
     }
@@ -109,21 +123,27 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           </CenteredSection>
           <Section>
             <H2>
-              <FormattedMessage {...messages.trymeHeader} />
+              <FormattedMessage {...messages.genresHeader} />
             </H2>
             <Form onSubmit={this.props.onSubmitForm}>
               <label htmlFor="genre">
                 <FormattedMessage {...messages.trymeMessage} />
-                <AtPrefix>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </AtPrefix>
                 <select onChange={this.props.onChangeGenre}>
-                  <option value="volvo">WW1</option>
-                  <option value="saab">WW2</option>
+                  <option value=""></option>
+                  <option value="">Any Genre</option>
+                  <option value="1">WW1</option>
+                  <option value="2">WW2</option>
                 </select>
               </label>
             </Form>
+          </Section>
+          <Section>
+            <H2>
+              <FormattedMessage {...messages.storiesHeader} />
+            </H2>
             <StoriesList {...storiesListProps} selectedStorySlug={selectedStorySlug} />
+          </Section>
+          <Section>
             {map}
             {poiContent}
           </Section>
@@ -150,6 +170,9 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
+    onLoadPageHook: (evt) => {
+      dispatch(changeGenre(''))
+    },
     onChangeGenre: (evt) => {
       dispatch(changeGenre(evt.target.value))
       dispatch(loadStories())
