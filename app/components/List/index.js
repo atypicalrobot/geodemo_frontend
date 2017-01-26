@@ -5,12 +5,13 @@ import Wrapper from './Wrapper';
 
 function List(props) {
   const ComponentToRender = props.component;
+  const selectedSlug = props.selectedSlug;
   let content = (<div></div>);
 
   // If we have items, render them
   if (props.items) {
     content = props.items.map((item, index) => (
-      <ComponentToRender key={`item-${index}`} item={item} />
+      <ComponentToRender key={`item-${index}`} item={item} selectedSlug={selectedSlug} />
     ));
   } else {
     // Otherwise render a single component

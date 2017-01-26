@@ -12,28 +12,42 @@ import { FormattedNumber } from 'react-intl';
 // import { makeSelectCurrentGenre } from 'containers/App/selectors';
 import { changePoi } from 'containers/HomePage/actions';
 import ListItem from 'components/ListItem';
-import IssueIcon from './IssueIcon';
-import IssueLink from './IssueLink';
 import PoiLink from './PoiLink';
+import SelectedPoiLink from './SelectedPoiLink';
 import Wrapper from './Wrapper';
 
 export class PoiListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   onPoiClick(item) {
-    console.log("Poi clicked!!")
-    console.log(item)
+    console.log("Poi clicked!!");
+    console.log(item);
   }
 
   render() {
     const item = this.props.item;
-    let nameprefix = '';
+    let selectedSlug = this.props.selectedSlug;
+    let poiContent = "";
+
+
+    if(item.slug == selectedSlug){
+      // extraContent = (<p> {item.description} </p>)
+      poiContent = (
+        <SelectedPoiLink href={item.html_url} target="_blank" onClick={() => this.props.onPoiClick(item)}>
+          {item.title}
+        </SelectedPoiLink>
+      )
+    } else {
+      poiContent = (
+        <PoiLink href={item.html_url} target="_blank" onClick={() => this.props.onPoiClick(item)}>
+          {item.title}
+        </PoiLink>
+      )
+    }
 
     // Put together the content of the poi
     const content = (
       <Wrapper>
-        <PoiLink href={item.html_url} target="_blank" onClick={() => this.props.onPoiClick(item)}>
-          {item.title}
-        </PoiLink>
+        {poiContent}
       </Wrapper>
     );
 

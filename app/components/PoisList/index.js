@@ -5,7 +5,7 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import PoiListItem from 'containers/PoiListItem';
 
-function PoisList({ loading, error, pois }) {
+function PoisList({ loading, error, pois, selectedPoiSlug }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -18,7 +18,7 @@ function PoisList({ loading, error, pois }) {
   }
 
   if (pois !== false) {
-    return <List items={pois} component={PoiListItem} />;
+    return <List items={pois} component={PoiListItem} selectedSlug={selectedPoiSlug} />;
   }
 
   return null;

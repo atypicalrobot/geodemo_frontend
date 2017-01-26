@@ -38,6 +38,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 
   render() {
     const { loading, error, stories, pois, story, position, selectedPoi } = this.props;
+    let selectedStorySlug = false;
     const storiesListProps = {
       loading,
       error,
@@ -57,16 +58,23 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     console.log(position)
 
     if(story !== false) {
+      selectedStorySlug = story.slug
+      let selectedPoiSlug = false;
 
       if (story.pois !== false) {
-        poiContent = (<PoisList pois={story.pois} loading={loading} error={error} />);
+        let selected = false;
+
         poiMarkers = story.pois.map((poi) => {
-          let selected = false;
+          
           if(poi.slug == selectedPoi.slug){
+            selectedPoiSlug = selectedPoi.slug
             selected = true;
           }
           return <PoiMarker key={poi.slug} poi={poi} selected={selected} />
         });
+
+        poiContent = (<PoisList pois={story.pois} loading={loading} error={error} selectedPoiSlug={selectedPoiSlug} />);
+
         // poiMarkers = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
         map = (
           <Map center={position.toJS()} zoom={13} style={mapStyle}>
@@ -118,7 +126,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                 />
               </label>
             </Form>
-            <StoriesList {...storiesListProps} />
+            <StoriesList {...storiesListProps} selectedStorySlug={selectedStorySlug} />
             {map}
             {poiContent}
           </Section>

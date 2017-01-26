@@ -15,6 +15,7 @@ import ListItem from 'components/ListItem';
 import IssueIcon from './IssueIcon';
 import IssueLink from './IssueLink';
 import StoryLink from './StoryLink';
+import SelectedStoryLink from './SelectedStoryLink';
 import Wrapper from './Wrapper';
 
 export class StoryListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -26,14 +27,28 @@ export class StoryListItem extends React.PureComponent { // eslint-disable-line 
 
   render() {
     const item = this.props.item;
-    let nameprefix = '';
+    let selectedSlug = this.props.selectedSlug;
+    let storyContent = "";
+
+    if(item.slug == selectedSlug){
+      // extraContent = (<p> {item.description} </p>)
+      storyContent = (
+        <SelectedStoryLink href={item.html_url} target="_blank" onClick={() => this.props.onStoryClick(item)}>
+          {item.title}
+        </SelectedStoryLink>
+      )
+    } else {
+      storyContent = (
+        <StoryLink href={item.html_url} target="_blank" onClick={() => this.props.onStoryClick(item)}>
+          {item.title}
+        </StoryLink>
+      )
+    }
 
     // Put together the content of the story
     const content = (
       <Wrapper>
-        <StoryLink href={item.html_url} target="_blank" onClick={() => this.props.onStoryClick(item)}>
-          {item.title}
-        </StoryLink>
+        {storyContent}
       </Wrapper>
     );
 

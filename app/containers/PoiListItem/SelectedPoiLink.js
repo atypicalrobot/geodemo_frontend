@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 import A from 'components/A';
 
-const IssueLink = styled(A)`
+const SelectedPoiLink = styled(A)`
   height: 100%;
-  color: black;
+  color: blue;
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 100%;
 `;
 
-export default IssueLink;
+export default SelectedPoiLink;

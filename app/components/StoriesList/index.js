@@ -5,7 +5,7 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import StoryListItem from 'containers/StoryListItem';
 
-function StoriesList({ loading, error, stories }) {
+function StoriesList({ loading, error, stories, selectedStorySlug }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -18,7 +18,7 @@ function StoriesList({ loading, error, stories }) {
   }
 
   if (stories !== false) {
-    return <List items={stories} component={StoryListItem} />;
+    return <List items={stories} component={StoryListItem} selectedSlug={selectedStorySlug}  />;
   }
 
   return null;
