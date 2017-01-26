@@ -117,13 +117,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                 <AtPrefix>
                   <FormattedMessage {...messages.trymeAtPrefix} />
                 </AtPrefix>
-                <Input
-                  id="genre"
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.genre}
-                  onChange={this.props.onChangeGenre}
-                />
+                <select onChange={this.props.onChangeGenre}>
+                  <option value="volvo">WW1</option>
+                  <option value="saab">WW2</option>
+                </select>
               </label>
             </Form>
             <StoriesList {...storiesListProps} selectedStorySlug={selectedStorySlug} />
@@ -153,7 +150,10 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeGenre: (evt) => dispatch(changeGenre(evt.target.value)),
+    onChangeGenre: (evt) => {
+      dispatch(changeGenre(evt.target.value))
+      dispatch(loadStories())
+    },
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadStories());
