@@ -17,6 +17,12 @@ import StoryLink from './StoryLink';
 import Wrapper from './Wrapper';
 
 export class StoryListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  onStoryClick(item) {
+    console.log("Story clicked!!")
+    console.log(item)
+  }
+
   render() {
     const item = this.props.item;
     let nameprefix = '';
@@ -24,7 +30,7 @@ export class StoryListItem extends React.PureComponent { // eslint-disable-line 
     // Put together the content of the story
     const content = (
       <Wrapper>
-        <StoryLink href={item.html_url} target="_blank">
+        <StoryLink href={item.html_url} target="_blank" onClick={() => this.onStoryClick(item)}>
           {item.title}
         </StoryLink>
       </Wrapper>
