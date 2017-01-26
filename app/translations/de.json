@@ -21,7 +21,7 @@
   "boilerplate.containers.AboutPage.state_management.header": "Berechenbare Stateverwaltung",
   "boilerplate.containers.AboutPage.state_management.message": "Unidirectional data flow erlaubt uns alle Änderungen ihrer Applikation zu loggen und time travel debugging einzusetzen.",
   "boilerplate.containers.HomePage.start_project.header": "High Wycombe Geschichte",
-  "boilerplate.containers.HomePage.start_project.message": "Ein plattformübergreifendes, offline-erstes GIS-Tool mit Fokus auf Performance und Best Practices",
+  "boilerplate.containers.HomePage.start_project.message": "Entdecken Sie High Wycombe und erfahren Sie mehr über seine Geschichte",
   "boilerplate.containers.HomePage.tryme.atPrefix": "",
   "boilerplate.containers.HomePage.tryme.header": "Sich aufmachen",
   "boilerplate.containers.HomePage.tryme.message": "Genre wählen: ",

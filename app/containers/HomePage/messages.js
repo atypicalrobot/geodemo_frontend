@@ -12,7 +12,7 @@ export default defineMessages({
   },
   startProjectMessage: {
     id: 'boilerplate.containers.HomePage.start_project.message',
-    defaultMessage: 'A cross-platform, offline-first GIS tool with a focus on performance and best practices',
+    defaultMessage: 'Explore High Wycombe and learn about its history',
   },
   trymeHeader: {
     id: 'boilerplate.containers.HomePage.tryme.header',
