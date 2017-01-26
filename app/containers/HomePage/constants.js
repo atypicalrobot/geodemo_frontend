@@ -11,3 +11,4 @@
 
 export const CHANGE_GENRE = 'boilerplate/Home/CHANGE_GENRE';
 export const CHANGE_STORY = 'boilerplate/Home/CHANGE_STORY';
+export const CHANGE_POI = 'boilerplate/Home/CHANGE_POI';

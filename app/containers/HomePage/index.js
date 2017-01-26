@@ -10,12 +10,11 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-import { Slider } from 'react-slick';
-
 
 import { makeSelectStories, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import StoriesList from 'components/StoriesList';
+import PoisList from 'components/PoisList';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
@@ -46,20 +45,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 
     let poiContent;
 
-    var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-
     if(story !== false) {
 
       if (story.pois !== false) {
-        poiContent = story.pois.map((poi) => {
-          return <h3 key={poi.slug}> {poi.title} </h3>
-        });
+        poiContent = (<PoisList pois={story.pois} loading={loading} error={error} />);
         // poiContent = (<Marker position={position}><Popup><span>Get in my belly!</span></Popup></Marker>)
        
       }

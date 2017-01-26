@@ -18,6 +18,7 @@
 import {
   CHANGE_GENRE,
   CHANGE_STORY,
+  CHANGE_POI,
 } from './constants';
 
 /**
@@ -38,5 +39,12 @@ export function changeStory(story) {
   return {
     type: CHANGE_STORY,
     story,
+  };
+}
+
+export function changePoi(poi) {
+  return {
+    type: CHANGE_POI,
+    poi,
   };
 }

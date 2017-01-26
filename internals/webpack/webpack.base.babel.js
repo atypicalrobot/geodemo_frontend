@@ -13,6 +13,13 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [{
+      include: [
+          /react-carousel\/src/
+      ],
+      loader: 'babel-loader',
+      test: /\.js$/
+    },
+    {
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel-loader',
       exclude: /node_modules/,
